@@ -1,0 +1,59 @@
+<!doctype html>
+<header>
+    <h1>🔐 Secure Encrypt & Decrypt Tool</h1>
+    <p>Encrypt or decrypt text easily in your browser using AES-GCM and a custom salt.</p>
+</header>
+
+
+<main>
+    <section class="card">
+        <h2>Encryption</h2>
+        <textarea id="plaintext" placeholder="Enter text to encrypt..."></textarea>
+
+
+        <div class="inputs">
+            <input id="passphrase" type="password" placeholder="Passphrase" />
+            <input id="salt" type="text" placeholder="Salt" />
+        </div>
+
+
+        <div class="buttons">
+            <button id="encryptBtn">Encrypt</button>
+            <button id="generateSalt" class="secondary">Generate Salt</button>
+        </div>
+
+
+        <textarea id="ciphertext" placeholder="Encrypted text will appear here..." readonly></textarea>
+    </section>
+
+
+    <section class="card">
+        <h2>Decryption</h2>
+        <textarea id="cipherToDecrypt" placeholder="Paste ciphertext to decrypt..."></textarea>
+
+
+        <div class="inputs">
+            <input id="passphrase2" type="password" placeholder="Passphrase" />
+            <input id="salt2" type="text" placeholder="Salt" />
+        </div>
+
+
+        <div class="buttons">
+            <button id="decryptBtn">Decrypt</button>
+        </div>
+
+
+        <textarea id="decrypted" placeholder="Decrypted text will appear here..." readonly></textarea>
+    </section>
+</main>
+
+
+<footer>
+    <p>All operations are performed locally in your browser. Your data never leaves this page.</p>
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+
+</html>
