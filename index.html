@@ -1,67 +1,125 @@
 <!doctype html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encrypt / Decrypt</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none';">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()">
+    <meta name="description" content="A local-only encrypt/decrypt tool that runs entirely in the browser.">
+    <title>Secure Encrypt & Decrypt Tool</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<header>
-    <h1>🔐 Secure Encrypt & Decrypt Tool</h1>
-    <p>Encrypt or decrypt text easily in your browser using AES-GCM and a custom salt.</p>
+<body>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-</header>
-
-
-<main>
-    <section class="card">
-        <h2>Encryption</h2>
-        <textarea id="plaintext" placeholder="Enter text to encrypt..."></textarea>
-
-
-        <div class="inputs">
-            <input id="passphrase" type="password" placeholder="Passphrase" />
-            <input id="salt" type="text" placeholder="Salt" />
+    <header class="hero">
+        <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+            <span class="theme-toggle__icon">☀️</span>
+            <span class="theme-toggle__label">Light</span>
+            <span class="theme-toggle__thumb"></span>
+        </button>
+        <div class="hero__content">
+            <div class="hero__icon">🛡️</div>
+            <p class="eyebrow">Private by design</p>
+            <h1>Secure Encrypt & Decrypt Tool</h1>
+            <p>Protect sensitive text directly in your browser with AES-GCM and a custom salt. Your data stays on this device.</p>
         </div>
-
-
-        <div class="buttons">
-            <button id="encryptBtn">Encrypt</button>
-            <button id="generateSalt" class="secondary">Generate Salt</button>
+        <div class="hero__highlights">
+            <div class="highlight">Local-only processing</div>
+            <div class="highlight">AES-GCM encryption</div>
+            <div class="highlight">Simple, secure workflow</div>
         </div>
-
-
-        <textarea id="ciphertext" placeholder="Encrypted text will appear here..." readonly></textarea>
-    </section>
-
-
-    <section class="card">
-        <h2>Decryption</h2>
-        <textarea id="cipherToDecrypt" placeholder="Paste ciphertext to decrypt..."></textarea>
-
-
-        <div class="inputs">
-            <input id="passphrase2" type="password" placeholder="Passphrase" />
-            <input id="salt2" type="text" placeholder="Salt" />
+        <div class="visual-banner">
+            <div class="visual-banner__item">
+                <span class="dot dot-blue"></span>
+                <strong>Zero-knowledge flow</strong>
+                <span>Everything stays in your browser.</span>
+            </div>
+            <div class="visual-banner__item">
+                <span class="dot dot-orange"></span>
+                <strong>Fast and simple</strong>
+                <span>Encrypted or decrypted in seconds.</span>
+            </div>
+            <div class="visual-banner__item">
+                <span class="dot dot-purple"></span>
+                <strong>Secure by default</strong>
+                <span>Modern cryptography with custom salt.</span>
+            </div>
         </div>
+    </header>
 
+    <main class="app-shell">
+        <section class="card">
+            <div class="card__header">
+                <div>
+                    <h2>🔒 Encrypt</h2>
+                    <p>Turn plain text into secure ciphertext.</p>
+                </div>
+                <span class="pill">Step 1</span>
+            </div>
 
-        <div class="buttons">
-            <button id="decryptBtn">Decrypt</button>
-        </div>
+            <label class="field-label" for="plaintext">Plaintext</label>
+            <textarea id="plaintext" placeholder="Enter text to encrypt..."></textarea>
 
+            <div class="inputs">
+                <input id="passphrase" type="password" placeholder="Passphrase" />
+                <input id="salt" type="text" placeholder="Salt" />
+            </div>
 
-        <textarea id="decrypted" placeholder="Decrypted text will appear here..." readonly></textarea>
-    </section>
-</main>
+            <div class="buttons">
+                <button id="encryptBtn" type="button">Encrypt text</button>
+                <button id="generateSalt" class="secondary" type="button">Generate salt</button>
+                <button id="clearEncryptBtn" class="ghost" type="button">Clear</button>
+            </div>
 
+            <div id="encryptStatus" class="status" role="status" aria-live="polite"></div>
 
-<footer>
-    <p>All operations are performed locally in your browser. Your data never leaves this page.</p>
-</footer>
+            <label class="field-label" for="ciphertext">Ciphertext</label>
+            <textarea id="ciphertext" placeholder="Encrypted text will appear here..." readonly></textarea>
 
+            <div class="buttons compact">
+                <button id="copyEncryptBtn" class="ghost" type="button">Copy result</button>
+            </div>
+        </section>
 
-<script src="script.js"></script>
+        <section class="card">
+            <div class="card__header">
+                <div>
+                    <h2>🔓 Decrypt</h2>
+                    <p>Recover your original text using the same passphrase and salt.</p>
+                </div>
+                <span class="pill">Step 2</span>
+            </div>
+
+            <label class="field-label" for="cipherToDecrypt">Ciphertext</label>
+            <textarea id="cipherToDecrypt" placeholder="Paste ciphertext to decrypt..."></textarea>
+
+            <div class="inputs">
+                <input id="passphrase2" type="password" placeholder="Passphrase" />
+                <input id="salt2" type="text" placeholder="Salt" />
+            </div>
+
+            <div class="buttons">
+                <button id="decryptBtn" type="button">Decrypt text</button>
+                <button id="clearDecryptBtn" class="ghost" type="button">Clear</button>
+            </div>
+
+            <div id="decryptStatus" class="status" role="status" aria-live="polite"></div>
+
+            <label class="field-label" for="decrypted">Decrypted text</label>
+            <textarea id="decrypted" placeholder="Decrypted text will appear here..." readonly></textarea>
+
+            <div class="buttons compact">
+                <button id="copyDecryptBtn" class="ghost" type="button">Copy result</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>All operations are performed locally in your browser. Your data never leaves this page and no content is sent to any online service.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
