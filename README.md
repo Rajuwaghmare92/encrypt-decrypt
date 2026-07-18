@@ -45,6 +45,4 @@ For the best security, choose a strong, unique passkey that is difficult for oth
 
 ## Disclaimer
 
-This website is designed to help users encrypt and decrypt their passwords using a passkey provided by the user. You are responsible for keeping your passkey safe. The encrypted data can only be decrypted with the exact same passkey that was used during encryption. Losing your passkey means your encrypted passwords cannot be recovered.
-
-By using this website, you acknowledge that password security ultimately depends on how safely you manage and protect your passkey.
+Keep your passphrase safe. If you lose it, your encrypted data cannot be recovered.
